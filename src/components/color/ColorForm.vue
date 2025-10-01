@@ -134,7 +134,8 @@ export default {
           g: this.greenVal,
           b: this.blueVal,
           favorite: this.favVal,
-          hex: this.hexVal
+          hex: this.hexVal,
+          brightness: 255,  // default to max brightness for saved/fav colors (to be updated later)
         }
       }
       return colorJSON;
