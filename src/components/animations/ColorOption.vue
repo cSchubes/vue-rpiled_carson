@@ -70,7 +70,23 @@ export default {
   },
   watch: {
     values (val) {
-      this.$emit('colorChange', this.values);
+      const selectedColors = val.slice(0, this.numButtons);
+      this.$emit('colorChange', selectedColors);
+      //this.$emit('colorChange', this.values);
+    }
+  },
+  // Add a watch on numButtons to send the updated list when a button is added/removed
+  watch: {
+    values (val) {
+      // Keep this, as it handles a color change in a visible swatch
+      const selectedColors = val.slice(0, this.numButtons);
+      this.$emit('colorChange', selectedColors);
+    },
+    numButtons (newNum, oldNum) {
+      // FIX: Also emit when a button is added or removed, 
+      // which changes the number of *selected* colors.
+      const selectedColors = this.values.slice(0, newNum);
+      this.$emit('colorChange', selectedColors);
     }
   },
   methods: {
