@@ -125,8 +125,10 @@ export default {
     },
     toggle() {
       this.favVal = this.favVal - 1
-      const payload = this.getCurrentColor();
-      ColorService.updateColor(payload);
+      let currColor = this.getCurrentColor();
+      delete currColor.color.brightness;
+      console.log(currColor)
+      ColorService.updateColor(currColor);
     },
     getCurrentColor() {
       var colorJSON = {
