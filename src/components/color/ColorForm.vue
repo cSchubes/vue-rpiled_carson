@@ -120,6 +120,7 @@ export default {
       console.log(this.getCurrentColor());
       currColor = this.getCurrentColor()
       ColorService.triggerColor({...currColor.color});
+      console.log({...currColor.color})
       this.$emit('cancelled', false);
     },
     toggle() {
