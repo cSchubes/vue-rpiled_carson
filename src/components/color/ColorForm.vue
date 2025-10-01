@@ -144,7 +144,9 @@ export default {
     },
     save() {
       // update PUT call here
-      ColorService.updateColor(this.getCurrentColor());
+      let currColor = this.getCurrentColor();
+      delete currColor.brightness;
+      ColorService.updateColor(currColor);
       this.$emit('cancelled', false);
     },
     test() {
