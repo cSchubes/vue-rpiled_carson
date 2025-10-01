@@ -94,7 +94,7 @@
                     ></v-text-field>
                 </v-flex> -->
             </v-layout>
-            <v-layout align-center justify-center row fill-height>
+            <!-- v-layout align-center justify-center row fill-height>
                     <p style='top: 4px; position: relative;'>Empty Light Alternation</p>
                 <v-flex xs12 sm4>
                     <v-overflow-btn
@@ -106,7 +106,7 @@
                         item-value="text"
                     ></v-overflow-btn>
                 </v-flex>
-            </v-layout>
+            </v-layout> -->
 
       </v-flex>
 
