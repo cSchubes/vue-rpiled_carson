@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
       <v-card width="22.5em">
-          <v-flex v-if="favorite == 0" >
+          <v-flex v-if="favVal == 0" >
             <v-btn flat icon color="grey" @click="toggle()">
               <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
