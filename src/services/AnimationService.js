@@ -2,6 +2,7 @@ import Api from '@/services/Api'
 
 export default {
   triggerAnimation (name, payload) {
+    console.log(payload)
     return Api().post(`/animations/${name}`, payload)
   },
 
