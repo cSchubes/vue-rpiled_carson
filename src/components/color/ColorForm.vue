@@ -124,7 +124,14 @@ export default {
       this.$emit('cancelled', false);
     },
     toggle() {
-      this.favVal = this.favVal - 1
+      // Example: If a button click toggles the status
+      if (this.favVal === 1) {
+          // Current status is FAVORITE (1), so change it to NOT FAVORITE (0)
+          this.favVal = 0;
+      } else {
+          // Current status is NOT FAVORITE (0), so change it to FAVORITE (1)
+          this.favVal = 1;
+      }
       let currColor = this.getCurrentColor();
       delete currColor.color.brightness;
       console.log(currColor)
