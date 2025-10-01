@@ -125,7 +125,6 @@ export default {
       this.favVal = !this.favVal;
       this.getCurrentColor().favorite = !this.getCurrentColor().favorite
       ColorService.updateColor(this.getCurrentColor());
-      this.$emit('cancelled', false);
     },
     getCurrentColor() {
       var colorJSON = {
