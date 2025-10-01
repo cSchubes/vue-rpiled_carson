@@ -55,12 +55,12 @@ export default {
       defaults: {},
       timeRules: [
         v => !!v || 'Time is required',
-        v => /^[0-9]+$/.test(v) || 'Integers only'
+        v => (v.length > 0 && /^[0-9]+$/.test(v)) || 'Integers only'
       ],
       // NEW VALIDATION RULES
       iterationsRules: [
         v => !!v || 'Iterations is required',
-        v => /^[0-9]+$/.test(v) || 'Integers only'
+        v => (v.length > 0 && /^[0-9]+$/.test(v)) || 'Integers only'
       ],
     }
   },
@@ -129,6 +129,8 @@ export default {
       this.updateDataAndStore(this.animation);
     } else {
       this.data = JSON.parse(JSON.stringify(this.defaults));
+      this.data.time = String(this.data.time); // Convert to string
+      this.data.iterations = String(this.data.iterations); // Convert to string
       this.updateStoreInput();
     }
   },
@@ -138,7 +140,11 @@ export default {
       if (this.animation) {
         this.updateDataAndStore(this.animation);
       } else {
-        this.data = this.defaults;
+        //this.data = this.defaults;
+          // FIX 2: Ensure time and iterations are strings when resetting from defaults
+        this.data = JSON.parse(JSON.stringify(this.defaults)); // Deep copy
+        this.data.time = String(this.data.time); 
+        this.data.iterations = String(this.data.iterations);
         this.updateStoreInput();
       }
     }
