@@ -118,7 +118,7 @@ export default {
     clicked() {
       console.log('triggering: ')
       console.log(this.getCurrentColor());
-      currColor = this.getCurrentColor()
+      let currColor = this.getCurrentColor()
       ColorService.triggerColor({...currColor.color});
       console.log({...currColor.color})
       this.$emit('cancelled', false);
