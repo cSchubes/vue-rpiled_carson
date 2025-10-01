@@ -124,7 +124,7 @@ export default {
     toggle() {
       this.favVal = !this.favVal;
       this.getCurrentColor().favorite = !this.getCurrentColor().favorite
-      colorService.updateColor(this.getCurrentColor());
+      ColorService.updateColor(this.getCurrentColor());
       this.$emit('cancelled', false);
     },
     getCurrentColor() {
@@ -149,7 +149,7 @@ export default {
 
     },
     deleteC() {
-      ColorService.deleteColor(getCurrentColor());
+      ColorService.deleteColor(this.getCurrentColor());
       this.$emit('cancelled', false);
     },
     componentToHex(c) {
