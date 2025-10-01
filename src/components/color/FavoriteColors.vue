@@ -1,5 +1,5 @@
 <template>
-  <swatch :favorites='true'></swatch>
+  <Swatch :favorites='true'></Swatch>
 </template>
 <script>
 import Swatch from '@/components/color/Swatch'
