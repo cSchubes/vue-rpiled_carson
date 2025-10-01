@@ -118,7 +118,8 @@ export default {
     clicked() {
       console.log('triggering: ')
       console.log(this.getCurrentColor());
-      ColorService.triggerColor(this.getCurrentColor());
+      currColor = this.getCurrentColor()
+      ColorService.triggerColor({...currColor.color});
       this.$emit('cancelled', false);
     },
     toggle() {
