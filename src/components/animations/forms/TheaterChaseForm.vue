@@ -8,7 +8,19 @@
       @input="updateStoreInput"
       :placeholder="`Default: ${this.defaults.time}`"      
     ></v-text-field>
-    <!-- <color-option></color-option> -->
+    <v-text-field
+      required
+      :rules="iterationsRules"
+      label="Iterations"
+      v-model="data.iterations"
+      @input="updateStoreInput"
+      :placeholder="`Default: ${this.defaults.iterations}`"
+    ></v-text-field>
+    <color-option 
+      @colorChange="updateColorAndStore" 
+      :maxColors="5" 
+      :minColors="0"
+    ></color-option>
   </div>
 </template>
 
@@ -17,7 +29,7 @@ import AnimationService from '@/services/AnimationService'
 import AnimationFormStore from '@/stores/animationFormStore.js'
 import ColorOption from '@/components/animations/ColorOption'
 
-const fields = ['time']
+const fields = ['time', 'color', 'iterations']
 
 export default {
   name: 'TheaterChaseForm',
@@ -44,7 +56,12 @@ export default {
       timeRules: [
         v => !!v || 'Time is required',
         v => /^[0-9]+$/.test(v) || 'Integers only'
-      ]
+      ],
+      // NEW VALIDATION RULES
+      iterationsRules: [
+        v => !!v || 'Iterations is required',
+        v => /^[0-9]+$/.test(v) || 'Integers only'
+      ],
     }
   },
   methods: {
@@ -58,6 +75,46 @@ export default {
     // helper function to avoid direct mapping of component data to store
     updateStoreInput () {
       AnimationFormStore.data = this.data;
+    },
+
+    updateColorAndStore (colors) {
+      let colorPayload;
+    
+      if (colors && colors.length > 0) {
+        // Convert hex strings to an array of integers if colors are present
+        colorPayload = colors.map(hex => {
+          // Remove the '#' symbol and parse the hex string to a decimal integer (base 16)
+          return this.convertHexToRgbObject(hex);
+        });
+      } else {
+        // If no colors are selected (0 colors), send an empty array or null/0 
+        // depending on what your backend expects for "no color." 
+        // Using an empty array [] is a common practice for multi-color fields.
+        colorPayload = null; 
+      }
+    
+      // Assign the resulting payload to the 'color' field in local data
+      this.$set(this.data, 'color', colorPayload);
+      console.log(this.data)
+    
+      // Synchronize the local data with the global store
+      this.updateStoreInput();
+    },
+
+    convertHexToRgbObject(hex) {
+      // Ensure the '#' is present if it's missing, though ColorOption returns it.
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+    
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
     },
 
     async loadDefaults () {
