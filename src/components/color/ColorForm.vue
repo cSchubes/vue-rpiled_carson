@@ -124,9 +124,9 @@ export default {
       this.$emit('cancelled', false);
     },
     toggle() {
-      this.favVal = !this.favVal;
-      this.getCurrentColor().favorite = !this.getCurrentColor().favorite
-      ColorService.updateColor(this.getCurrentColor());
+      this.favVal = this.favVal - 1
+      const payload = this.getCurrentColor();
+      ColorService.updateColor(payload);
     },
     getCurrentColor() {
       var colorJSON = {
