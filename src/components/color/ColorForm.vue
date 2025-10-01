@@ -3,12 +3,12 @@
       <v-card width="22.5em">
           <v-flex v-if="favorite == 0" >
             <v-btn flat icon color="grey" @click="toggle()">
-              <v-icon>favorite</v-icon>
+              <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
           </v-flex>
           <v-flex v-else >
             <v-btn flat icon color="red" @click="toggle()">
-              <v-icon>favorite</v-icon>
+              <v-icon>mdi-heart</v-icon>
             </v-btn>
           </v-flex>
           <v-layout row justify-center>
