@@ -137,10 +137,6 @@ const LINKS = [
       { title: 'Saved', icon: 'bookmark', route: '/animation/saved'},
       { title: 'Favorites', icon: 'mdi-heart', route: '/animation/favorites'}
     ]
-  },
-  { title: 'Patterns', 
-    icon: 'texture', 
-    route: '/patterns'
   }
 ]
 
