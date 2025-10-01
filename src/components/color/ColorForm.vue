@@ -51,7 +51,7 @@
           </v-flex>
         <v-card-actions>
           <v-layout justify-space-between style="margin-left:1em; margin-right: 1em;">
-            <v-btn color="error" @click="clicked()">Delete</v-btn>
+            <v-btn color="error" @click="deleteC()">Delete</v-btn>
             <v-btn fab dark small color="primary" @click="clicked()">
               <v-icon>mdi-lightbulb-on</v-icon>
             </v-btn>
@@ -122,10 +122,10 @@ export default {
       this.$emit('cancelled', false);
     },
     toggle() {
-      if (this.favVal == 0)
-        this.favVal = 1;
-      else if (this.favVal == 1)
-        this.favVal = 0;
+      this.favVal = !this.favVal;
+      this.getCurrentColor().favorite = !this.getCurrentColor().favorite
+      colorService.updateColor(this.getCurrentColor());
+      this.$emit('cancelled', false);
     },
     getCurrentColor() {
       var colorJSON = {
